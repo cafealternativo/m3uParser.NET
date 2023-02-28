@@ -26,7 +26,18 @@ namespace m3uParser
     {
         public static Extm3u Parse(string content)
         {
-            return new Extm3u(content);
+
+            try
+            {
+                return new Extm3u(content);
+            }
+            catch (M3UParserException ex) 
+                { throw ex; }
+            catch (Exception ex)
+            {
+                throw new M3UParserException("Could not parse content", ex);
+
+            }
         }
 
         public static Extm3u ParseBytes(byte[] byteArr)

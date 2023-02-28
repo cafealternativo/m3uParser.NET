@@ -9,6 +9,8 @@ namespace m3uParser
 {
     internal static class PrimitiveSpecification
     {
+
+      
         internal static readonly Parser<string> ValueNumber =
             from value in Parse.Number.Text()
             select value;
@@ -91,6 +93,14 @@ namespace m3uParser
             from media in Parse.CharExcept(Environment.NewLine).Many().Text()
             from ignore in Parse.CharExcept('#').Many()
             select new Media(first.Duration, first.Attributes.AttributeList, first.Title, media);
+
+        internal static readonly Parser<Media> Extgrp =            
+            from category in Parse.CharExcept(Environment.NewLine).Many().Text()
+            from nl in Parse.String("\r").Optional()
+            from nl2 in Parse.String("\n").Optional()
+            from media in Parse.CharExcept(Environment.NewLine).Many().Text()
+            from ignore in Parse.CharExcept('#').Many()
+            select new Media(0, null, null, media, category);
     }
 
     //internal static class ParseSpecification

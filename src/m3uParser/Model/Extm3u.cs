@@ -8,6 +8,15 @@ using Sprache;
 
 namespace m3uParser.Model
 {
+
+    public class M3UParserException : Exception { 
+    
+        public M3UParserException(string message):base(message) { }
+
+        public M3UParserException(string message, Exception inner) : base(message, inner) { }
+
+    }
+
     public class Extm3u
     {
         public string PlayListType { get; set; }
@@ -27,14 +36,16 @@ namespace m3uParser.Model
 
             var segments = SegmentSpecification.SegmentCollection.Parse(content);
 
+            
+
             if (segments == null || segments.Count() == 0)
             {
-                throw new Exception("The content cannot be parsed");
+                throw new M3UParserException("The content cannot be parsed. Zero segments found.");
             }
 
             if (!segments.First().StartsWith("#EXTM3U", StringComparison.CurrentCultureIgnoreCase))
             {
-                throw new Exception("The content do not has extm3u header");
+                throw new M3UParserException("The content do not has extm3u header");
             }
             else
             {
@@ -44,6 +55,7 @@ namespace m3uParser.Model
 
             IList<string> warnings = new List<string>();
             IList<Media> medias = new List<Media>();
+            Media lastMedia = null;
 
             foreach (var item in segments.Skip(1))
             {
@@ -70,7 +82,29 @@ namespace m3uParser.Model
                     case "EXTINF":
                         try
                         {
-                            medias.Add(new Media(tag.Value));
+                            lastMedia = LinesSpecification.Extinf.Parse(tag.Value); 
+                            medias.Add(lastMedia);
+                        }
+                        catch
+                        {
+                            warnings.Add($"Can't parse media #{tag.Key}{(string.IsNullOrEmpty(tag.Value) ? string.Empty : ":")}{tag.Value}");
+                        }
+                        break;
+                    
+                    //this is the minimal change that I can do to support EXTGRP and avoiding breaking anything
+                    case "EXTGRP":
+                        try
+                        {
+                            if (lastMedia == null) {
+
+                                warnings.Add($"Improper EXTGRP tag found");                                
+                                break;
+                            }
+
+                            var m = LinesSpecification.Extgrp.Parse(tag.Value);
+                            lastMedia.Group = m.Group;
+                            if(string.IsNullOrEmpty( lastMedia.MediaFile ))
+                                lastMedia.MediaFile = m.MediaFile;
                         }
                         catch
                         {
