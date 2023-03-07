@@ -98,9 +98,18 @@ namespace m3uParser
             from category in Parse.CharExcept(Environment.NewLine).Many().Text()
             from nl in Parse.String("\r").Optional()
             from nl2 in Parse.String("\n").Optional()
-            from media in Parse.CharExcept(Environment.NewLine).Many().Text()
+                //from media in Parse.CharExcept(Environment.NewLine).Many().Text()
+            from media in Parse.CharExcept((c) => c == '\n' && c == '\r' && c == '#', "").Many().Text()
             from ignore in Parse.CharExcept('#').Many()
             select new Media(0, null, null, media, category);
+
+        internal static readonly Parser<Media> ExtVLT =
+            from directive in Parse.CharExcept(Environment.NewLine).Many().Text()
+            from nl in Parse.String("\r").Optional()
+            from nl2 in Parse.String("\n").Optional()
+            from media in Parse.CharExcept((c)=> c=='\n' && c== '\r' && c == '#',"").Many().Text()
+            from ignore in Parse.CharExcept('#').Many()
+            select new Media(0, null, null, media, null, directive);
     }
 
     //internal static class ParseSpecification

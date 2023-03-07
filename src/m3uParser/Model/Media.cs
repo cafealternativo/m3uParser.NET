@@ -21,6 +21,9 @@ namespace m3uParser
 
         public string Group { get; set; }
 
+        public string VlCopt { get; set; }
+
+
         internal Media(string source)
         {
             var media = LinesSpecification.Extinf.Parse(source);
@@ -31,13 +34,14 @@ namespace m3uParser
             this.Attributes = media.Attributes;
         }
 
-        internal Media(decimal duration, IEnumerable<KeyValuePair<string, string>> attributes, Title title, string mediafile, string group=null)
+        internal Media(decimal duration, IEnumerable<KeyValuePair<string, string>> attributes, Title title, string mediafile, string group=null, string vlcopt=null)
         {
             Duration = duration;
             Title = title;
             MediaFile = mediafile;
             Attributes = new Attributes(attributes);
             Group = group;
+            VlCopt = vlcopt;
         }
     }
 }

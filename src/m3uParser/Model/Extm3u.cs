@@ -112,6 +112,30 @@ namespace m3uParser.Model
                         }
                         break;
 
+                    //this is the minimal change that I can do to support EXTGRP and avoiding breaking anything
+                    case "EXTVLCOPT":
+                        try
+                        {
+                            if (lastMedia == null)
+                            {
+
+                                warnings.Add($"Improper EXTVLCOPT tag found");
+                                break;
+                            }
+
+                            var m = LinesSpecification.ExtVLT.Parse(tag.Value);
+                            
+                            lastMedia.VlCopt = m.VlCopt;
+
+                            if (string.IsNullOrEmpty(lastMedia.MediaFile))
+                                lastMedia.MediaFile = m.MediaFile;
+                        }
+                        catch
+                        {
+                            warnings.Add($"Can't parse media #{tag.Key}{(string.IsNullOrEmpty(tag.Value) ? string.Empty : ":")}{tag.Value}");
+                        }
+                        break;
+
                     case "EXT-X-ENDLIST":
                         this.HasEndList = true;
                         break;
