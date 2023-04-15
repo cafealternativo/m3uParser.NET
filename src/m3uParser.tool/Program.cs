@@ -68,7 +68,8 @@ https://6.com/live-stream-playlist/5a7b1e63a8da282c34d65445.m3u8
 #EXTINF:-1 channelNumber=8 tvgId=8 tvg-id=8 tvglogo=""https://tvabiertapublicfiles.blob.core.windows.net/images/multimedios_8_logo.png"" tvg-logo=""https://tvabiertapublicfiles.blob.core.windows.net/images/multimedios_8_logo.png"" tvgurl="""" tvg-url="""" group-title="""" tvg-country=""CRC"" tvgcountry=""CRC""tvgname="""" tvg-name="""", Multimedios Canal 8
 #comment
 
-#EXTVLCOPT:last vlt, no group with comment before and after
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148
+
 https://7TH.com/live-stream-playlist/5a7b1e63a8da282c34d65445.m3u8
 
 #comment
