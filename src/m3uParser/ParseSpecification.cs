@@ -1,6 +1,7 @@
 ﻿using Sprache;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -27,8 +28,8 @@ namespace m3uParser
 
         internal static readonly Parser<decimal> DecimalSigned =
             from op in Parse.Optional(Parse.Char('-').Token())
-            from num in Parse.Decimal
-            select decimal.Parse(num) * (op.IsDefined ? -1 : 1);
+            from num in Parse.DecimalInvariant
+            select decimal.Parse(num, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture) * (op.IsDefined ? -1 : 1);
     }
 
     internal static class PairsSpecification
