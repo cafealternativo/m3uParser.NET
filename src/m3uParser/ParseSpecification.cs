@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 [assembly: InternalsVisibleTo("m3uParser.Tests")]
 namespace m3uParser
@@ -122,12 +123,31 @@ namespace m3uParser
     //            select new Root(string.Empty, info, new AttributeInfo(header));
     //}
 
+
+    
     internal static class SegmentSpecification
     {
-        internal static readonly Parser<string> Segment =
-                from header in Parse.Chars(new char[] { '\r', '\n', '#' }).Many()
-                from content in Parse.CharExcept(new char[] { '#' }).Many().Text()
+
+        //this is too slow
+        private static Parser<string> startLineParser = Parse.Regex(new Regex(@"\s*#") );
+        private static Parser<string> breaklineAndStartLineParser = Parse.Regex(new Regex(@"[\n\r]\s*#") );
+                
+
+        internal static readonly Parser<string> Segment =                
+                from header in startLineParser.Once()
+                from content in Parse.AnyChar.Except(breaklineAndStartLineParser).Many().Text()                
                 select string.Concat("#", content);
+
+
+
+        //Change this to consider segments only that start with a #, not necesarily in the 
+        //middle of the line
+        //internal static readonly Parser<string> Segment =
+        //        from header in Parse.Chars(new char[] { '\r', '\n', '#' }).Many()
+        //        from content in Parse.CharExcept(new char[] { '#' }).Many().Text()//this is not correct, an attribute or item name can have the # symbol
+        //        select string.Concat("#", content);
+
+
 
         internal static readonly Parser<IEnumerable<string>> SegmentCollection =
                 from collection in Segment.Many()

@@ -21,10 +21,43 @@ namespace m3uParser.tool
             //var simpleVodM3u = M3U.Parse(simpleVod);
             //var headerParameterM3u = M3U.Parse(headerParameter);
 
-            var simplem3u = M3U.Parse(simplePlaylist);
+            var simplem3u = M3U.Parse(problemList);
+
+            Console.WriteLine("Warnings: " + simplem3u.Warnings.Count());
         }
 
+        //Every # symbol is being interpreted as a comment inside the list and is breaking the line
 
+        static readonly string problemList =
+ @"#EXTM3U
+#EXTINF:-1 tvg-id=""ESPNEWS.us"" group-title=""Sports News"" tvg-logo=""https://xxx.url2.net/uploads/1518524153.png"" tvg-name=""ESPNNews"" tvg-num=""1"", ESPNNews
+https://xxx.url.net/viewsa/ch01q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+#EXTINF:-1 tvg-id=""US0"" group-title=""EVENTS (NFL, EPL, PPV)"" tvg-logo=""https://xxx.url2.net/uploads/USsmall.png"" tvg-name=""US Event Channel #0"" tvg-num=""90"", US Event Channel #0
+https://xxx.url.net/viewsa/ch90q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+#EXTINF:-1 tvg-id=""EU13"" group-title=""TBD(ComingSoon)"" tvg-logo=""https://xxx.url2.net/uploads/"" tvg-name=""Plus 8"" tvg-num=""152"", Plus 8
+https://xxx.url.net/viewsa/ch152q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+";
+        /*
+ @"
+#EXTM3U
+#EXTINF:-1 tvg-id=""ESPNEWS.us"" group-title=""Sports News"" tvg-logo=""https://xxx.url2.net/uploads/1518524153.png"" tvg-name=""ESPNNews"" tvg-num=""1"", ESPNNews
+https://xxx.url.net/viewsa/ch01q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+#EXTINF:-1 tvg-id=""ESPN.us"" group-title=""Sports News"" tvg-logo=""https://xxx.url2.net/uploads/1518524153-1.png"" tvg-name=""ESPN"" tvg-num=""2"", ESPN
+https://xxx.url.net/viewsa/ch02q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+#EXTINF:-1 tvg-id=""ESPN2.us"" group-title=""Sports News"" tvg-logo=""https://xxx.url2.net/uploads/1518524153-2.png"" tvg-name=""ESPN2"" tvg-num=""3"", ESPN2
+https://xxx.url.net/viewsa/ch03q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+#EXTINF:-1 tvg-id=""US0"" group-title=""EVENTS (NFL, EPL, PPV)"" tvg-logo=""https://xxx.url2.net/uploads/USsmall.png"" tvg-name=""US Event Channel #0"" tvg-num=""90"", US Event Channel #0
+https://xxx.url.net/viewsa/ch90q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=        
+#EXTINF:-1 tvg-id=""US1"" group-title=""EVENTS (NFL, EPL, PPV)"" tvg-logo=""https://xxx.url2.net/uploads/USsmall.png"" tvg-name=""US Event Channel #1"" tvg-num=""91"", US Event Channel #1
+https://xxx.url.net/viewsa/ch91q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+#EXTINF:-1 tvg-id=""NBCSportsonPeacock.us"" group-title=""US Regional Sports"" tvg-logo=""https://xxx.url2.net/uploads/"" tvg-name=""NBCSN"" tvg-num=""143"", NBCSN
+https://xxx.url.net/viewsa/ch143q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+#EXTINF:-1 tvg-id=""EU11"" group-title=""TBD(ComingSoon)"" tvg-logo=""https://xxx.url2.net/uploads/"" tvg-name=""NZ SS Mix #2"" tvg-num=""150"", NZ SS Mix #2
+https://xxx.url.net/viewsa/ch150q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+#EXTINF:-1 tvg-id=""EU13"" group-title=""TBD(ComingSoon)"" tvg-logo=""https://xxx.url2.net/uploads/"" tvg-name=""Plus 8"" tvg-num=""152"", Plus 8
+https://xxx.url.net/viewsa/ch152q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+         
+         */
 
 
         static readonly string simplePlaylist =
