@@ -128,25 +128,31 @@ namespace m3uParser
     internal static class SegmentSpecification
     {
 
-        //this is too slow
-        private static Parser<string> startLineParser = Parse.Regex(new Regex(@"\s*#") );
-        private static Parser<string> breaklineAndStartLineParser = Parse.Regex(new Regex(@"[\n\r]\s*#") );
-                
+        //using regex is  too slow. Dont ever do it again
 
+        //Parse.Regex(new Regex(@"\s*#") );
+        //A start line can have several empty chars (spaces, tabs, breaklines) and then 1 # sign
+        private static Parser<IEnumerable<char>> startLineHash = Parse.Chars('\r', '\n', ' ', '\t').Many().Optional().Then(c=> Parse.Char('#').Once());
+
+        //Parse.Regex(new Regex(@"[\n\r]\s*#") );
+        private static Parser<IEnumerable<char>> breaklineAndStartLineHash = Parse.Chars('\r','\n').Then(c=> startLineHash);
+
+        
         internal static readonly Parser<string> Segment =                
-                from header in startLineParser.Once()
-                from content in Parse.AnyChar.Except(breaklineAndStartLineParser).Many().Text()                
+                from header in startLineHash.Once()
+                from content in Parse.AnyChar.Except(breaklineAndStartLineHash).Many().Text()                
                 select string.Concat("#", content);
+        
 
 
-
-        //Change this to consider segments only that start with a #, not necesarily in the 
-        //middle of the line
-        //internal static readonly Parser<string> Segment =
-        //        from header in Parse.Chars(new char[] { '\r', '\n', '#' }).Many()
-        //        from content in Parse.CharExcept(new char[] { '#' }).Many().Text()//this is not correct, an attribute or item name can have the # symbol
-        //        select string.Concat("#", content);
-
+        
+        //Original segment logic
+        /*
+        internal static readonly Parser<string> Segment =
+                from header in Parse.Chars(new char[] { '\r', '\n', '#' }).Many()
+                from content in Parse.CharExcept(new char[] { '#' }).Many().Text()//this is not correct, an attribute or item name can have the # symbol
+                select string.Concat("#", content);
+        */
 
 
         internal static readonly Parser<IEnumerable<string>> SegmentCollection =

@@ -1,0 +1,7 @@
+#EXTM3U
+#EXTINF:-1 tvg-id="ESNEWS.us" group-title="Sports News" tvg-logo="https://192.168.1.50/uploads/1518524153.png" tvg-name="ESNews" tvg-num="1", ESNews
+https://192.168.1.50/viewsa/ch01q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+#EXTINF:-1 tvg-id="US0" group-title="EVENTS" tvg-logo="https://192.168.1.50/uploads/USsmall.png" tvg-name="US Event Channel #0" tvg-num="90", US Event Channel #0
+https://192.168.1.50/viewsa/ch90q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+#EXTINF:-1 tvg-id="EU13" group-title="TBD(ComingSoon)" tvg-logo="https://192.168.1.50/uploads/" tvg-name="Plus 8" tvg-num="152", Plus 8
+https://192.168.1.50/viewsa/ch152q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=

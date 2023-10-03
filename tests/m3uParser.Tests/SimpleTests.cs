@@ -36,11 +36,41 @@ namespace m3uParser.Tests
             Assert.AreEqual(header_with_parameters.Attributes.Cache, 500);
 
             var iptv_sample = M3U.Parse(Sample.iptv_sample);
-            Assert.AreEqual(iptv_sample.Medias.ElementAt(2).Attributes.TvgShift, "+1");
+            Assert.AreEqual( "+1", iptv_sample.Medias.ElementAt(2).Attributes.TvgShift);
+
+            var samsung_list = M3U.Parse(Sample.samsung);
+            Assert.AreEqual(1409, samsung_list.Medias.Count());
+
+            var hash_list = M3U.Parse(Sample.hashsigns);
+            Assert.AreEqual( 3, hash_list.Medias.Count());
 
             var big_list = M3U.Parse(Sample.big_list);
-            Assert.AreEqual(big_list.Medias.Count(), 902);
+            Assert.AreEqual (902, big_list.Medias.Count());
         }
+
+        [TestMethod]
+        public void SamsungTest()
+        {
+            var samsung_list = M3U.Parse(Sample.samsung);
+            Assert.AreEqual(1409, samsung_list.Medias.Count());
+        }
+
+        [TestMethod]
+        public void HashTest()
+        {
+            var hash_list = M3U.Parse(Sample.hashsigns);
+            Assert.AreEqual(3, hash_list.Medias.Count());
+        }
+
+        //this test is failing because it assumes each # in the same line is another media
+        //I will add proper support for t
+        [TestMethod]
+        public void BigListTest()
+        {
+            var big_list = M3U.Parse(Sample.big_list);
+            Assert.AreEqual(902, big_list.Medias.Count());
+        }
+
 
         [TestMethod]
         public void HeaderWithParametersTest()

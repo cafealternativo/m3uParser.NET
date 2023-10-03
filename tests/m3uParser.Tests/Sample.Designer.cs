@@ -100,6 +100,18 @@ namespace m3uParser.Tests {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to #EXTM3U
+        ///#EXTINF:-1 tvg-id=&quot;ESNEWS.us&quot; group-title=&quot;Sports News&quot; tvg-logo=&quot;https://xxx.url2.net/uploads/1518524153.png&quot; tvg-name=&quot;ESNews&quot; tvg-num=&quot;1&quot;, ESPNNews
+        ///https://xxx.url.net/viewsa/ch01q1/playlist.m3u8?wmsAuthSign=NumberMS8yMDIzIDI6NDQ6MjAgUE0maGFzaEncryptingEEwUlJQeUxFSndVTFdRPT0mdObscuringMjAwJmlkPTYwMjkzJmlwPTk2LjQ0LjE5MS4xMzU=
+        ///#EXTINF:-1 tvg-id=&quot;US0&quot; group-title=&quot;EVENTS (NFL, EPL, PPV)&quot; tvg-logo=&quot;https://xxx.url2.net/uploads/USsmall.png&quot; tvg-name=&quot;US Event Channel #0&quot; tvg-num=&quot;90&quot;, US Event Chan [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string hashsigns {
+            get {
+                return ResourceManager.GetString("hashsigns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to #EXTM3U url-tvg=&quot;http://www.teleguide.info/download/new3/jtv.zip&quot; m3uautoload=1 cache=500 deinterlace=1 tvg-shift=0
         ///#EXTINF:-1 tvgname=&quot;Первый_канал&quot; tvglogo=&quot;Первый канал&quot; grouptitle=&quot;Каналы ЦЭТВ РТРС&quot; ,Первый канал
         ///http://192.168.1.1:4022/udp/225.77.225.1:5000
@@ -142,6 +154,19 @@ namespace m3uParser.Tests {
         internal static string sample_paste_bin {
             get {
                 return ResourceManager.GetString("sample_paste_bin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #EXTM3U x-tvg-url=&quot;https://i.mjh.nz/SamsungTVPlus/all.xml&quot;
+        ///#EXTINF:-1 channel-id=&quot;samsung-ATBB3100001RH&quot; tvg-id=&quot;ATBB3100001RH&quot; tvg-logo=&quot;https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/ATBB3100001RH_20230913T030447SQUARE.png_20230913030447.png&quot; tvg-chno=&quot;4001&quot; group-title=&quot;Austria&quot; , Crime Mix
+        ///https://i.mjh.nz/SamsungTVPlus/ATBB3100001RH.m3u8
+        ///
+        ///#EXTINF:-1 channel-id=&quot;samsung-ATBA1000004XC&quot; tvg-id=&quot;ATBA1000004XC&quot; tvg-logo=&quot;https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelog [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string samsung {
+            get {
+                return ResourceManager.GetString("samsung", resourceCulture);
             }
         }
         
